@@ -1,15 +1,15 @@
 "use client";
 
 import useConnect from "@/hooks/useConnect";
-import Image from "next/image";
-import { useState } from "react";
 import { OneRamp } from "@oneramp/sdk";
-import ConnectButton from "./components/ConnectButton";
 import { ethers } from "ethers";
+import { useState } from "react";
 import { RotatingSquare } from "react-loader-spinner";
+import ConnectButton from "./components/ConnectButton";
 
-const clientPub = "";
-const secretKey = "";
+const clientPub = "RMPPUBK-ac207989912b456613d700c31b3cc4f9-X";
+const secretKey =
+  "RMPSEC-939a99a984d483a69d8a417ec616705ec27de60cd89df5fca2c9c3dbba71a373-X";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -48,7 +48,7 @@ export default function Home() {
       const result = await oneramp.offramp(
         "usdt",
         Number(amount),
-        "256700719619"
+        phone.toString()
       );
 
       if (result.success) {
@@ -71,14 +71,14 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex flex-col items-center justify-between min-h-screen p-24">
       <div>
-        <h1 className="text-xl text-center font-bold">OffRamp - DApp</h1>
+        <h1 className="text-xl font-bold text-center">OffRamp - DApp</h1>
 
         <>
           {currentAccount ? (
             <div className="">
-              <h1 className="text-sm text-blue-400 underline my-5">
+              <h1 className="my-5 text-sm text-blue-400 underline">
                 {currentAccount}{" "}
               </h1>
 
@@ -87,14 +87,14 @@ export default function Home() {
                   type="number"
                   placeholder="0.0"
                   disabled={loading}
-                  className="w-full bg-neutral-700 outline-none text-white p-3"
+                  className="w-full p-3 text-white outline-none bg-neutral-700"
                   onChange={(e) => setAmount(e.target.value)}
                 />
                 <input
                   type="tel"
                   disabled={loading}
                   placeholder="Enter Phone"
-                  className="w-full my-5 bg-neutral-700 outline-none text-white p-3"
+                  className="w-full p-3 my-5 text-white outline-none bg-neutral-700"
                   onChange={(e) => setPhone(e.target.value)}
                 />
                 <button
